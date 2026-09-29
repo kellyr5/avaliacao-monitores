@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Avaliação da Plataforma UNIFEI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --fg:#152033; --muted:#5b6678; --line:#d9dfe8;
+  --accent:#1b4f9c; --accent-fg:#ffffff; --warn:#a4560a; --ok:#1d7a4d;
+  --display:"Source Serif 4",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f1622; --surface:#172131; --fg:#e6ebf3; --muted:#9aa6ba; --line:#2a374d;
+  --accent:#7fb0f0; --accent-fg:#0b1422; --warn:#e9a55c; --ok:#5fcf98; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--body);padding-inline:16px;padding-block:24px 56px}
+main{max-width:720px;margin:0 auto}
+h1{font:700 1.8rem/1.15 var(--display);margin:8px 0 6px;text-wrap:balance}
+h2{font:700 1.15rem/1.25 var(--display);margin:0 0 10px}
+.lead{color:var(--muted);margin:0 0 18px;max-width:62ch}
+.tag{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 18px;margin-bottom:14px}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+.item{padding:14px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0;padding-top:4px}
+.item legend,.item>label{display:block;font-weight:500;margin-bottom:8px;padding:0}
+select,textarea,input[type=text]{width:100%;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+textarea{min-height:72px;resize:vertical}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.scale{display:flex;gap:6px;flex-wrap:wrap}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label{min-width:46px;text-align:center;padding:8px 12px;border:1px solid var(--line);border-radius:6px;cursor:pointer;background:var(--bg)}
+.scale.wide label{padding:8px 14px}
+.scale input:checked+label{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.scale input:focus-visible+label{outline:2px solid var(--accent);outline-offset:2px}
+.hint{font-size:.8rem;color:var(--muted);margin:0 0 6px}
+button{font:600 .95rem var(--body);padding:11px 22px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.err{color:var(--warn);font-size:.9rem;margin:10px 0 0;min-height:1.2em}
+.done{text-align:center;padding:20px 18px}
+.done h2{color:var(--ok)}
+</style>
+</head>
+<body>
+<main>
+  <span class="tag">TCC · Plataforma UNIFEI</span>
+  <h1>O que você achou da plataforma?</h1>
+  <p class="lead">Responda com base na demonstração. A maioria é só tocar na nota, cerca de 4 minutos. Não é preciso ter conta em nenhum site.</p>
+  <form id="f" novalidate></form>
+</main>
+
+<script>
+/* Endereço do Google Apps Script (ver LEIA-ME.md). Cole aqui a URL terminada em /exec. */
+const ENDPOINT = "";
+
+const GROUPS=[
+ ["us","Usabilidade",[
+  ["us1","Entendi para que serve a plataforma logo na demonstração."],
+  ["us2","As telas parecem fáceis de usar."],
+  ["us3","Eu conseguiria usar sozinho(a), sem precisar de ajuda."],
+  ["us4","É claro como ir de uma área a outra (fórum, trabalhos, voluntariado)."],
+  ["us5","Os textos e botões são fáceis de entender."]]],
+ ["fo","Fórum e monitoria",[
+  ["fo1","Ter um fórum por disciplina ajudaria a tirar dúvidas."],
+  ["fo2","As funções (responder, votar, melhor resposta, moderar) fazem sentido."],
+  ["fo3","Os pedidos de ajuda e o canal de monitoria facilitariam o trabalho do monitor."],
+  ["fo4","A busca por dúvidas parecidas já respondidas seria útil."]]],
+ ["co","Grupos, chats e dúvidas dos alunos",[
+  ["co1","O chat privado do grupo (texto, áudio e anexos) ajudaria a organizar trabalhos em equipe."],
+  ["co2","Um chat privado entre monitor e professor facilitaria alinhar o atendimento aos alunos."],
+  ["co3","Receber as dúvidas dos alunos pela plataforma é melhor do que por WhatsApp ou e-mail."],
+  ["co4","Eu conseguiria acompanhar quais dúvidas ainda estão sem resposta."]]],
+ ["vo","Voluntariado",[
+  ["vo1","Achar e se inscrever em uma oportunidade parece simples."],
+  ["vo2","As informações da oportunidade (horas, local, requisitos) estão claras."],
+  ["vo3","Receber certificado com código de validação é útil."]]]
+];
+const ALL=GROUPS.flatMap(g=>g[2]);
+const CURSOS=["Ciência da Computação","Engenharia de Computação","Sistemas de Informação","Engenharia Elétrica","Engenharia Mecânica","Engenharia de Produção","Engenharia Civil","Engenharia Ambiental","Engenharia Hídrica","Engenharia Química","Engenharia de Materiais","Engenharia de Controle e Automação","Engenharia de Energia","Física","Matemática","Química","Outro"];
+const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
+const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
+const UTIL=["Chat privado de grupo","Chat monitor e professor","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
+const USO=["Usaria","Talvez usaria","Não usaria"];
+const $=s=>document.querySelector(s);
+function esc(s){const d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML}
+function scale(name,vals,cls){return `<div class="scale ${cls||""}">`+vals.map((v,i)=>`<input type="radio" name="${name}" id="${name}_${i}" value="${esc(v)}"><label for="${name}_${i}">${esc(v)}</label>`).join("")+"</div>"}
+function options(list){return '<option value="">Selecione</option>'+list.map(o=>`<option>${esc(o)}</option>`).join("")}
+
+function render(){
+  let h=`<div class="card"><h2>Sobre você</h2>
+  <div class="item"><label for="curso">Curso</label><select id="curso">${options(CURSOS)}</select></div>
+  <div class="item"><label for="periodo">Período</label><select id="periodo">${options(PERIODOS)}</select></div>
+  <fieldset class="item"><legend>Qual é a sua relação com monitoria?</legend>${scale("perfil",["Sou monitor(a)","Já fui monitor(a)","Nunca fui"],"wide")}</fieldset>
+  <fieldset class="item"><legend>Você quer se identificar?</legend>${scale("ident",["Prefiro ficar anônimo(a)","Quero me identificar"],"wide")}
+  <div id="nomebox" style="margin-top:10px" hidden><label for="nome" style="font-weight:400">Seu nome</label><input type="text" id="nome" autocomplete="name"></div></fieldset></div>`;
+  GROUPS.forEach(([g,titulo,itens])=>{
+    h+=`<div class="card"><h2>${titulo}</h2><p class="hint">1 = discordo totalmente · 5 = concordo totalmente</p>`;
+    itens.forEach(([k,t])=>{h+=`<fieldset class="item"><legend>${t}</legend>${scale(k,[1,2,3,4,5])}</fieldset>`});
+    h+=`<div class="item"><label for="obs_${g}">Algo aqui que confundiu, dificultou ou faltou? (opcional)</label><textarea id="obs_${g}"></textarea></div></div>`;
+  });
+  h+=`<div class="card"><div class="item"><label for="canal">Hoje, por onde as dúvidas dos alunos costumam chegar até você (ou chegariam)?</label><select id="canal">${options(CANAIS)}</select></div>
+  <div class="item"><label for="util">Qual funcionalidade seria mais útil na sua rotina?</label><select id="util">${options(UTIL)}</select></div>
+  <fieldset class="item"><legend>Você usaria esta plataforma na sua rotina?</legend>${scale("uso",USO,"wide")}</fieldset>
+  <div class="item"><label for="coment">Se pudesse mudar ou acrescentar uma coisa, qual seria? (opcional)</label><textarea id="coment"></textarea></div></div>
+  <div class="err" id="err" role="alert"></div><button type="button" id="send">Enviar</button>`;
+  $("#f").innerHTML=h;
+  document.querySelectorAll('[name="ident"]').forEach(r=>r.addEventListener("change",()=>{$("#nomebox").hidden=r.value!=="Quero me identificar"}));
+  $("#send").onclick=submit;
+}
+const val=n=>{const c=document.querySelector(`[name="${n}"]:checked`);return c?c.value:""};
+
+async function submit(){
+  const ident=val("ident")==="Quero me identificar"?"nome":val("ident")?"anon":"";
+  const p={enviado_em:new Date().toISOString(),curso:$("#curso").value,periodo:$("#periodo").value,perfil:val("perfil"),identificacao:ident,nome:ident==="nome"?$("#nome").value.trim():""};
+  ALL.forEach(([k])=>p[k]=val(k));
+  GROUPS.forEach(([g])=>p["obs_"+g]=$("#obs_"+g).value.trim());
+  p.canal_duvidas=$("#canal").value;p.mais_util=$("#util").value;p.uso=val("uso");p.comentario=$("#coment").value.trim();
+  if(!p.curso||!p.periodo||!p.perfil||!ident||!p.canal_duvidas||!p.mais_util||!p.uso||ALL.some(([k])=>!p[k])){$("#err").textContent="Falta responder alguma pergunta. Só os campos de texto são opcionais.";return}
+  if(ident==="nome"&&!p.nome){$("#err").textContent="Escreva seu nome ou escolha ficar anônimo(a).";return}
+  if(!ENDPOINT){$("#err").textContent="Formulário ainda não configurado.";return}
+  const b=$("#send");b.disabled=true;$("#err").textContent="";
+  try{
+    await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(p)});
+    try{localStorage.setItem("aval_enviada","1")}catch(e){}
+    $("#f").innerHTML='<div class="card done"><h2>Resposta enviada</h2><p class="lead" style="margin:6px auto 0">Obrigada por ajudar com o TCC.</p></div>';
+    scrollTo(0,0);
+  }catch(e){b.disabled=false;$("#err").textContent="Não foi possível enviar agora. Confira sua conexão e tente de novo."}
+}
+render();
+</script>
+</body>
+</html>
