@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Avaliação da Plataforma UNIFEI</title>
+<title>Plataforma UNIFEI para Alunos</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
@@ -23,11 +23,15 @@ h2{font:700 1.15rem/1.25 var(--display);margin:0 0 10px}
 .lead{color:var(--muted);margin:0 0 18px;max-width:62ch}
 .tag{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 18px;margin-bottom:14px}
+.what{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.what li{padding-left:14px;border-left:3px solid var(--accent)}
+.what b{display:block}
+.what span{color:var(--muted);font-size:.93rem}
 fieldset{border:0;padding:0;margin:0;min-width:0}
 .item{padding:14px 0;border-top:1px solid var(--line)}
 .item:first-of-type{border-top:0;padding-top:4px}
 .item legend,.item>label{display:block;font-weight:500;margin-bottom:8px;padding:0}
-select,textarea,input[type=text]{width:100%;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+select,textarea{width:100%;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
 textarea{min-height:72px;resize:vertical}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .scale{display:flex;gap:6px;flex-wrap:wrap}
@@ -47,42 +51,53 @@ button:disabled{opacity:.5;cursor:not-allowed}
 <body>
 <main>
   <span class="tag">TCC · Plataforma UNIFEI</span>
-  <h1>O que você achou da plataforma?</h1>
-  <p class="lead">Responda com base na demonstração. A maioria é só tocar na nota, cerca de 4 minutos. Não é preciso ter conta em nenhum site.</p>
+  <h1>O que a plataforma agregaria para você?</h1>
+  <p class="lead">Leia o que a plataforma oferece e responda pensando na sua rotina de estudos. Cerca de 3 minutos, sem conta em nenhum site e sem precisar informar o nome.</p>
+
+  <div class="card">
+    <h2>O que é a plataforma</h2>
+    <ul class="what">
+      <li><b>Fórum por disciplina</b><span>Tire dúvidas, veja respostas de colegas, monitores e professores, vote e marque a melhor resposta.</span></li>
+      <li><b>Busca de dúvidas parecidas</b><span>Encontre uma pergunta já respondida antes de criar uma nova.</span></li>
+      <li><b>Pedidos de ajuda e monitoria</b><span>Chame o monitor por um canal da própria disciplina.</span></li>
+      <li><b>Trabalhos em grupo</b><span>Chat privado do grupo com texto, áudio e anexos, mais um acervo de arquivos.</span></li>
+      <li><b>Notificações</b><span>Aviso quando alguém responde ou quando algo precisa da sua atenção.</span></li>
+      <li><b>Voluntariado e certificados</b><span>Oportunidades de ONGs, inscrição e certificado com código de validação.</span></li>
+    </ul>
+  </div>
   <form id="f" novalidate></form>
 </main>
 
 <script>
-/* Endereço do Google Apps Script (ver LEIA-ME.md). Cole aqui a URL terminada em /exec. */
+/* Endereço do Google Apps Script (ver LEIA-ME.md). */
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbw84dRhGo_nULZ6r1hRCBWexRJxE-FzFyx4E6bxVwEBiha1kkWRzpiMfaM8wrl9wQXOWA/exec";
 
 const GROUPS=[
- ["us","Usabilidade",[
-  ["us1","Entendi para que serve a plataforma logo na demonstração."],
-  ["us2","As telas parecem fáceis de usar."],
-  ["us3","Eu conseguiria usar sozinho(a), sem precisar de ajuda."],
-  ["us4","É claro como ir de uma área a outra (fórum, trabalhos, voluntariado)."],
-  ["us5","Os textos e botões são fáceis de entender."]]],
- ["fo","Fórum e monitoria",[
-  ["fo1","Ter um fórum por disciplina ajudaria a tirar dúvidas."],
-  ["fo2","As funções (responder, votar, melhor resposta, moderar) fazem sentido."],
-  ["fo3","Os pedidos de ajuda e o canal de monitoria facilitariam o trabalho do monitor."],
-  ["fo4","A busca por dúvidas parecidas já respondidas seria útil."]]],
- ["co","Grupos, chats e dúvidas dos alunos",[
-  ["co1","O chat privado do grupo (texto, áudio e anexos) ajudaria a organizar trabalhos em equipe."],
-  ["co2","Um chat privado entre monitor e professor facilitaria alinhar o atendimento aos alunos."],
-  ["co3","Receber as dúvidas dos alunos pela plataforma é melhor do que por WhatsApp ou e-mail."],
-  ["co4","Eu conseguiria acompanhar quais dúvidas ainda estão sem resposta."]]],
- ["vo","Voluntariado",[
-  ["vo1","Achar e se inscrever em uma oportunidade parece simples."],
-  ["vo2","As informações da oportunidade (horas, local, requisitos) estão claras."],
-  ["vo3","Receber certificado com código de validação é útil."]]]
+ ["ag","O que a plataforma agrega",[
+  ["ag1","Ter as dúvidas da disciplina em um só lugar me ajudaria a estudar."],
+  ["ag2","Ver respostas de colegas, monitores e professores me ajudaria a aprender."],
+  ["ag3","Achar uma dúvida parecida já respondida me faria economizar tempo."],
+  ["ag4","Pedir ajuda ao monitor pela plataforma é melhor do que por WhatsApp."],
+  ["ag5","Um espaço privado para o meu grupo de trabalho seria útil."],
+  ["ag6","Fazer voluntariado e receber certificado pela plataforma me motivaria."]]],
+ ["cp","Quanto cada parte seria útil para você",[
+  ["cp1","Fórum por disciplina"],
+  ["cp2","Pedidos de ajuda ao monitor"],
+  ["cp3","Busca de dúvidas parecidas"],
+  ["cp4","Chat privado do grupo"],
+  ["cp5","Acervo de arquivos dos trabalhos"],
+  ["cp6","Notificações"],
+  ["cp7","Oportunidades de voluntariado"],
+  ["cp8","Certificados com código de validação"]]],
+ ["us","Primeira impressão",[
+  ["us1","Entendi para que serve a plataforma."],
+  ["us2","As telas parecem fáceis de usar."]]]
 ];
 const ALL=GROUPS.flatMap(g=>g[2]);
 const CURSOS=["Ciência da Computação","Engenharia de Computação","Sistemas de Informação","Engenharia Elétrica","Engenharia Mecânica","Engenharia de Produção","Engenharia Civil","Engenharia Ambiental","Engenharia Hídrica","Engenharia Química","Engenharia de Materiais","Engenharia de Controle e Automação","Engenharia de Energia","Física","Matemática","Química","Outro"];
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
-const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
-const UTIL=["Chat privado de grupo","Chat monitor e professor","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
+const CANAIS=["Grupo de WhatsApp da turma","Perguntando ao professor","Perguntando ao monitor","Perguntando a colegas","Pesquisando na internet","Outro"];
+const UTIL=["Fórum por disciplina","Busca de dúvidas parecidas","Pedidos de ajuda ao monitor","Chat privado do grupo","Acervo de arquivos","Notificações","Voluntariado e certificado"];
 const USO=["Usaria","Talvez usaria","Não usaria"];
 const $=s=>document.querySelector(s);
 function esc(s){const d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML}
@@ -93,40 +108,33 @@ function render(){
   let h=`<div class="card"><h2>Sobre você</h2>
   <div class="item"><label for="curso">Curso</label><select id="curso">${options(CURSOS)}</select></div>
   <div class="item"><label for="periodo">Período</label><select id="periodo">${options(PERIODOS)}</select></div>
-  <fieldset class="item"><legend>Qual é a sua relação com monitoria?</legend>${scale("perfil",["Sou monitor(a)","Já fui monitor(a)","Nunca fui"],"wide")}</fieldset>
-  <fieldset class="item"><legend>Você quer se identificar?</legend>${scale("ident",["Prefiro ficar anônimo(a)","Quero me identificar"],"wide")}
-  <div id="nomebox" style="margin-top:10px" hidden><label for="nome" style="font-weight:400">Seu nome</label><input type="text" id="nome" autocomplete="name"></div></fieldset></div>`;
+  <div class="item"><label for="canal">Hoje, como você costuma tirar dúvidas de uma disciplina?</label><select id="canal">${options(CANAIS)}</select></div></div>`;
   GROUPS.forEach(([g,titulo,itens])=>{
-    h+=`<div class="card"><h2>${titulo}</h2><p class="hint">1 = discordo totalmente · 5 = concordo totalmente</p>`;
+    h+=`<div class="card"><h2>${titulo}</h2><p class="hint">${g==="cp"?"1 = nada útil · 5 = muito útil":"1 = discordo totalmente · 5 = concordo totalmente"}</p>`;
     itens.forEach(([k,t])=>{h+=`<fieldset class="item"><legend>${t}</legend>${scale(k,[1,2,3,4,5])}</fieldset>`});
-    h+=`<div class="item"><label for="obs_${g}">Algo aqui que confundiu, dificultou ou faltou? (opcional)</label><textarea id="obs_${g}"></textarea></div></div>`;
+    h+="</div>";
   });
-  h+=`<div class="card"><div class="item"><label for="canal">Hoje, por onde as dúvidas dos alunos costumam chegar até você (ou chegariam)?</label><select id="canal">${options(CANAIS)}</select></div>
-  <div class="item"><label for="util">Qual funcionalidade seria mais útil na sua rotina?</label><select id="util">${options(UTIL)}</select></div>
-  <fieldset class="item"><legend>Você usaria esta plataforma na sua rotina?</legend>${scale("uso",USO,"wide")}</fieldset>
-  <div class="item"><label for="coment">Se pudesse mudar ou acrescentar uma coisa, qual seria? (opcional)</label><textarea id="coment"></textarea></div></div>
-  <div class="card"><label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="consent" style="margin-top:5px"><span>Concordo em participar desta pesquisa. Minhas respostas serão usadas apenas no Trabalho de Conclusão de Curso, de forma agregada, e não serão associadas ao meu nome se eu escolher ficar anônimo(a).</span></label></div>
+  h+=`<div class="card"><div class="item"><label for="util">Qual parte seria a mais útil para você?</label><select id="util">${options(UTIL)}</select></div>
+  <fieldset class="item"><legend>Você usaria esta plataforma nas suas disciplinas?</legend>${scale("uso",USO,"wide")}</fieldset>
+  <div class="item"><label for="falta">Falta alguma coisa que você gostaria de ter? (opcional)</label><textarea id="falta"></textarea></div>
+  <div class="item"><label for="coment">Algo que não ficou claro ou que você mudaria? (opcional)</label><textarea id="coment"></textarea></div></div>
+  <div class="card"><label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="consent" style="margin-top:5px"><span>Concordo em participar desta pesquisa. Minhas respostas são anônimas e serão usadas apenas no Trabalho de Conclusão de Curso, de forma agregada.</span></label></div>
   <div class="err" id="err" role="alert"></div><button type="button" id="send">Enviar</button>`;
   $("#f").innerHTML=h;
-  document.querySelectorAll('[name="ident"]').forEach(r=>r.addEventListener("change",()=>{$("#nomebox").hidden=r.value!=="Quero me identificar"}));
   $("#send").onclick=submit;
 }
 const val=n=>{const c=document.querySelector(`[name="${n}"]:checked`);return c?c.value:""};
 
 async function submit(){
-  const ident=val("ident")==="Quero me identificar"?"nome":val("ident")?"anon":"";
-  const p={formulario:"monitores",enviado_em:new Date().toISOString(),curso:$("#curso").value,periodo:$("#periodo").value,perfil:val("perfil"),identificacao:ident,nome:ident==="nome"?$("#nome").value.trim():""};
+  const p={formulario:"alunos",enviado_em:new Date().toISOString(),curso:$("#curso").value,periodo:$("#periodo").value,canal_duvidas:$("#canal").value};
   ALL.forEach(([k])=>p[k]=val(k));
-  GROUPS.forEach(([g])=>p["obs_"+g]=$("#obs_"+g).value.trim());
-  p.canal_duvidas=$("#canal").value;p.mais_util=$("#util").value;p.uso=val("uso");p.comentario=$("#coment").value.trim();
-  if(!p.curso||!p.periodo||!p.perfil||!ident||!p.canal_duvidas||!p.mais_util||!p.uso||ALL.some(([k])=>!p[k])){$("#err").textContent="Falta responder alguma pergunta. Só os campos de texto são opcionais.";return}
+  p.mais_util=$("#util").value;p.uso=val("uso");p.falta=$("#falta").value.trim();p.comentario=$("#coment").value.trim();
+  if(!p.curso||!p.periodo||!p.canal_duvidas||!p.mais_util||!p.uso||ALL.some(([k])=>!p[k])){$("#err").textContent="Falta responder alguma pergunta. Só os campos de texto são opcionais.";return}
   if(!$("#consent").checked){$("#err").textContent="Marque a caixa de concordância para enviar.";return}
-  if(ident==="nome"&&!p.nome){$("#err").textContent="Escreva seu nome ou escolha ficar anônimo(a).";return}
   if(!ENDPOINT){$("#err").textContent="Formulário ainda não configurado.";return}
   const b=$("#send");b.disabled=true;$("#err").textContent="";
   try{
     await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(p)});
-    try{localStorage.setItem("aval_enviada","1")}catch(e){}
     $("#f").innerHTML='<div class="card done"><h2>Resposta enviada</h2><p class="lead" style="margin:6px auto 0">Obrigada por ajudar com o TCC.</p></div>';
     scrollTo(0,0);
   }catch(e){b.disabled=false;$("#err").textContent="Não foi possível enviar agora. Confira sua conexão e tente de novo."}
