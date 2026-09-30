@@ -81,7 +81,7 @@ const AREAS=[
  ["cp1","Fórum por disciplina","Você pergunta e colegas, monitores e professores respondem. A melhor resposta fica marcada e o que já foi resolvido fica guardado para a turma toda.","img/forum.jpg","Tela do fórum de uma disciplina"],
  ["cp2","Pedido de ajuda ao monitor","Você chama o monitor pela própria disciplina, em vez de depender de grupo de WhatsApp ou e-mail.","img/pedido-ajuda.png","Tela de pedido de ajuda"],
  ["cp3","Busca de dúvidas parecidas","Antes de perguntar, a busca mostra se alguém já resolveu a mesma dúvida, mesmo com outras palavras.","img/busca.jpg","Tela de busca do fórum"],
- ["cp4","Chat privado do grupo","Conversa só do seu grupo de trabalho, com texto, áudio e anexos. O professor não lê a conversa.","img/trabalhos-grupo.png","Tela de trabalhos em grupo"],
+ ["cp4","Chat privado do grupo","Cada grupo de trabalho tem a sua conversa, com texto, áudio e anexos, e só os integrantes do grupo a veem. O professor e os outros grupos não leem nada, e quem já está em um grupo não entra em outro.","img/grupo-chat.jpg|img/trabalhos-lista.jpg","Conversa do grupo e lista de grupos do trabalho"],
  ["cp5","Acervo de arquivos","Os arquivos dos trabalhos ficam reunidos em um só lugar, e cada um só aparece para quem tem permissão.","img/acervo.png","Tela do acervo de arquivos"],
  ["cp6","Notificações","Aviso na hora quando alguém responde sua dúvida ou quando algo precisa da sua atenção.","img/notificacoes.jpg","Tela de notificações"],
  ["cp7","Oportunidades de voluntariado","Vagas de ONGs e projetos, com inscrição e acompanhamento das suas horas pela plataforma.","img/voluntariado.jpg","Tela de oportunidades de voluntariado"],
@@ -114,7 +114,7 @@ function render(){
   <div class="item"><label for="canal">Hoje, como você costuma tirar dúvidas de uma disciplina?</label><select id="canal">${options(CANAIS)}</select></div></div>`;
   AREAS.forEach(([k,t,cap,img,alt],i)=>{
     h+=`<div class="card area"><h2><span class="n">${i+1}/${AREAS.length}</span>${t}</h2>
-    <figure class="shot"><img src="${img}" alt="${esc(alt)}" loading="lazy"><small>Toque na imagem para ampliar</small></figure>
+    ${img.split("|").map(u=>`<figure class="shot"><img src="${u}" alt="${esc(alt)}" loading="lazy"><small>Toque na imagem para ampliar</small></figure>`).join("")}
     <p class="cap">${cap}</p>
     <fieldset><legend class="hint" style="margin:0 0 6px">Quanto isso ajudaria você?</legend>${scale(k,[1,2,3,4,5])}
     <div class="ends"><span>1 = nada</span><span>5 = muito</span></div></fieldset></div>`;
