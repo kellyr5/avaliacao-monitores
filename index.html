@@ -42,6 +42,16 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .err{color:var(--warn);font-size:.9rem;margin:10px 0 0;min-height:1.2em}
 .done{text-align:center;padding:20px 18px}
 .done h2{color:var(--ok)}
+.tour{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0 0 18px}
+.tour figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;min-width:0}
+.tour img{display:block;width:100%;height:130px;object-fit:cover;object-position:top;border-radius:6px;border:1px solid var(--line);cursor:zoom-in}
+.tour figure.noimg img{display:none}
+.tour b{display:block;margin-top:8px;font-size:.92rem}
+.tour span{display:block;color:var(--muted);font-size:.82rem;line-height:1.4;margin-top:2px}
+.tourh{font:700 1.05rem var(--display);margin:0 0 4px}
+.zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:16px;z-index:20;cursor:zoom-out}
+.zoom.on{display:flex}
+.zoom img{max-width:100%;max-height:100%;border-radius:6px}
 </style>
 </head>
 <body>
@@ -49,7 +59,11 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <span class="tag">TCC · Plataforma UNIFEI</span>
   <h1>O que você achou da plataforma?</h1>
   <p class="lead">Responda com base na demonstração. A maioria é só tocar na nota, cerca de 4 minutos. Não é preciso ter conta em nenhum site.</p>
+  <h2 class="tourh">Veja a plataforma antes de responder</h2>
+  <p class="lead" style="margin-bottom:12px">Toque em uma imagem para ampliar. Você não precisa ter usado o site.</p>
+  <div class="tour" id="tour"></div>
   <form id="f" novalidate></form>
+  <div class="zoom" id="zoom"><img alt=""></div>
 </main>
 
 <script>
@@ -131,6 +145,20 @@ async function submit(){
     scrollTo(0,0);
   }catch(e){b.disabled=false;$("#err").textContent="Não foi possível enviar agora. Confira sua conexão e tente de novo."}
 }
+const TOUR=[
+ ["img/forum.png","Fórum por disciplina","Dúvidas com resposta de colegas, monitores e professores."],
+ ["img/pedido-ajuda.png","Pedido de ajuda","O aluno chama o monitor pela própria disciplina."],
+ ["img/trabalhos-grupo.png","Trabalhos em grupo","Chat privado do grupo, com áudio e anexos."],
+ ["img/painel-coordenacao.png","Painel da coordenação","Visão geral de atendimentos e atividade."],
+ ["img/voluntariado.png","Voluntariado","Vagas de ONGs, inscrição e acompanhamento de horas."],
+ ["img/certificado.png","Certificado","PDF com código que qualquer pessoa pode validar."]
+];
+$("#tour").innerHTML=TOUR.map(t=>`<figure><img src="${t[0]}" alt="${esc(t[1])}" loading="lazy"><b>${t[1]}</b><span>${t[2]}</span></figure>`).join("");
+document.querySelectorAll(".tour img").forEach(im=>{
+  im.addEventListener("error",()=>im.closest("figure").classList.add("noimg"));
+  im.addEventListener("click",()=>{const z=$("#zoom");z.querySelector("img").src=im.src;z.classList.add("on")});
+});
+$("#zoom").onclick=()=>$("#zoom").classList.remove("on");
 render();
 </script>
 </body>
