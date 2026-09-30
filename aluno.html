@@ -128,10 +128,11 @@ function render(){
   <details class="more"><summary>Quer detalhar mais? (opcional)</summary><p class="hint" style="margin-top:10px">1 = discordo totalmente · 5 = concordo totalmente</p>`;
   AGREGA.forEach(([k,t])=>{h+=`<fieldset class="item"><legend>${t}</legend>${scale(k,[1,2,3,4,5])}</fieldset>`});
   h+=`</details>
-  <div class="card"><label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="consent" style="margin-top:5px"><span>Concordo em participar desta pesquisa. Minhas respostas são anônimas e serão usadas apenas no Trabalho de Conclusão de Curso, de forma agregada.</span></label></div>
+  <div class="card" id="autoriza"><label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="consent" style="margin-top:5px;width:20px;height:20px;flex:none"><span><b>Autorizo o uso das informações que respondi</b> nesta pesquisa, apenas no Trabalho de Conclusão de Curso e de forma agregada e anônima. <b style="color:var(--warn)">(obrigatório para enviar)</b></span></label><p class="hint" style="margin:10px 0 0">O botão Enviar só é habilitado depois que você marcar esta autorização.</p></div>
   <div class="err" id="err" role="alert"></div><button type="button" id="send">Enviar</button>`;
   $("#f").innerHTML=h;
   $("#send").onclick=submit;
+  {const c=$("#consent"),b=$("#send");b.disabled=!c.checked;c.addEventListener("change",()=>{b.disabled=!c.checked;$("#autoriza").style.borderColor=c.checked?"":"var(--warn)"})}
   document.querySelectorAll(".shot img").forEach(im=>{
     im.addEventListener("error",()=>im.closest(".shot").classList.add("noimg"));
     im.addEventListener("click",()=>{const z=$("#zoom");z.querySelector("img").src=im.src;z.classList.add("on")});
@@ -154,7 +155,7 @@ async function submit(){
   [...AREAS.map(a=>a[0]),...COMPREENSAO.map(a=>a[0]),...AGREGA.map(a=>a[0])].forEach(k=>p[k]=val(k));
   p.mais_util=$("#util").value;p.uso=val("uso");p.falta="";p.comentario=$("#coment").value.trim();
   if(!p.curso||!p.periodo||!p.canal_duvidas||!p.mais_util||!p.uso||OBRIG.some(k=>!p[k])){$("#err").textContent="Falta responder alguma pergunta. Os campos de texto e a parte \"Quer detalhar mais?\" são opcionais.";return}
-  if(!$("#consent").checked){$("#err").textContent="Marque a caixa de concordância para enviar.";return}
+  if(!$("#consent").checked){$("#err").textContent="Marque a autorização de uso das informações para enviar.";$("#autoriza").style.borderColor="var(--warn)";return}
   const b=$("#send");b.disabled=true;$("#err").textContent="";
   try{
     await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(p)});
