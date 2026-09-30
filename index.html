@@ -146,12 +146,12 @@ async function submit(){
   }catch(e){b.disabled=false;$("#err").textContent="Não foi possível enviar agora. Confira sua conexão e tente de novo."}
 }
 const TOUR=[
- ["img/forum.png","Fórum por disciplina","Dúvidas com resposta de colegas, monitores e professores."],
+ ["img/forum.jpg","Fórum por disciplina","Dúvidas com resposta de colegas, monitores e professores."],
  ["img/pedido-ajuda.png","Pedido de ajuda","O aluno chama o monitor pela própria disciplina."],
  ["img/trabalhos-grupo.png","Trabalhos em grupo","Chat privado do grupo, com áudio e anexos."],
  ["img/painel-coordenacao.png","Painel da coordenação","Visão geral de atendimentos e atividade."],
- ["img/voluntariado.png","Voluntariado","Vagas de ONGs, inscrição e acompanhamento de horas."],
- ["img/certificado.png","Certificado","PDF com código que qualquer pessoa pode validar."]
+ ["img/voluntariado.jpg","Voluntariado","Vagas de ONGs, inscrição e acompanhamento de horas."],
+ ["img/certificados.jpg","Certificado","PDF com código que qualquer pessoa pode validar."]
 ];
 $("#tour").innerHTML=TOUR.map(t=>`<figure><img src="${t[0]}" alt="${esc(t[1])}" loading="lazy"><b>${t[1]}</b><span>${t[2]}</span></figure>`).join("");
 document.querySelectorAll(".tour img").forEach(im=>{
