@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" role="img" aria-label="Esquema do pedido de ajuda: o aluno marca uma mensagem do chat, só esse recorte chega ao monitor ou professor">
+  <rect width="900" height="330" fill="#f3f5f8"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1b4f9c"/></marker>
+  </defs>
+  <g font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" fill="#152033">
+    <rect x="24" y="24" width="262" height="230" rx="12" fill="#ffffff" stroke="#d9dfe8"/>
+    <circle cx="56" cy="58" r="15" fill="#1b4f9c"/><text x="56" y="64" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+    <text x="80" y="64" font-size="19" font-weight="700">No chat do grupo</text>
+    <text x="48" y="110" font-size="17">O aluno marca uma</text>
+    <text x="48" y="136" font-size="17">mensagem e escreve a</text>
+    <text x="48" y="162" font-size="17">descrição da dúvida.</text>
+    <rect x="48" y="184" width="214" height="44" rx="8" fill="#e3ecf8" stroke="#1b4f9c"/>
+    <text x="60" y="212" font-size="15" fill="#1b4f9c">Mensagem marcada</text>
+
+    <rect x="320" y="24" width="262" height="230" rx="12" fill="#ffffff" stroke="#d9dfe8"/>
+    <circle cx="352" cy="58" r="15" fill="#1b4f9c"/><text x="352" y="64" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
+    <text x="376" y="64" font-size="19" font-weight="700">Só o recorte sai</text>
+    <text x="344" y="110" font-size="17">Chega apenas a mensagem</text>
+    <text x="344" y="136" font-size="17">marcada e a descrição.</text>
+    <text x="344" y="170" font-size="17" font-weight="600">O resto da conversa</text>
+    <text x="344" y="196" font-size="17" font-weight="600">continua privado.</text>
+
+    <rect x="616" y="24" width="262" height="230" rx="12" fill="#ffffff" stroke="#d9dfe8"/>
+    <circle cx="648" cy="58" r="15" fill="#1b4f9c"/><text x="648" y="64" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">3</text>
+    <text x="672" y="64" font-size="19" font-weight="700">Monitor responde</text>
+    <text x="640" y="110" font-size="17">O pedido entra na fila do</text>
+    <text x="640" y="136" font-size="17">monitor da disciplina. Se</text>
+    <text x="640" y="162" font-size="17">não houver monitoria, vai</text>
+    <text x="640" y="188" font-size="17">para o professor.</text>
+
+    <path d="M288 139H316" stroke="#1b4f9c" stroke-width="3" fill="none" marker-end="url(#a)"/>
+    <path d="M584 139H612" stroke="#1b4f9c" stroke-width="3" fill="none" marker-end="url(#a)"/>
+    <text x="450" y="302" font-size="15" fill="#5b6678" text-anchor="middle">Esquema ilustrativo do funcionamento. Não é uma tela da plataforma.</text>
+  </g>
+</svg>

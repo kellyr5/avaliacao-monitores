@@ -84,7 +84,7 @@ const GROUPS=[
   ["fo4","A busca por dúvidas parecidas já respondidas seria útil."]]],
  ["co","Grupos, chats e dúvidas dos alunos",[
   ["co1","O chat privado do grupo (texto, áudio e anexos) ajudaria a organizar trabalhos em equipe."],
-  ["co2","Um chat privado entre monitor e professor facilitaria alinhar o atendimento aos alunos."],
+  ["co2","Receber o pedido de ajuda já recortado (mensagem marcada e descrição), sem ler a conversa toda do grupo, facilitaria o meu atendimento."],
   ["co3","Receber as dúvidas dos alunos pela plataforma é melhor do que por WhatsApp ou e-mail."],
   ["co4","Eu conseguiria acompanhar quais dúvidas ainda estão sem resposta."]]],
  ["vo","Voluntariado",[
@@ -96,7 +96,7 @@ const ALL=GROUPS.flatMap(g=>g[2]);
 const CURSOS=["Ciência da Computação","Engenharia de Computação","Sistemas de Informação","Engenharia Elétrica","Engenharia Mecânica","Engenharia de Produção","Engenharia Civil","Engenharia Ambiental","Engenharia Hídrica","Engenharia Química","Engenharia de Materiais","Engenharia de Controle e Automação","Engenharia de Energia","Física","Matemática","Química","Outro"];
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
 const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
-const UTIL=["Chat privado de grupo","Chat monitor e professor","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
+const UTIL=["Chat privado de grupo","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
 const USO=["Usaria","Talvez usaria","Não usaria"];
 const $=s=>document.querySelector(s);
 function esc(s){const d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML}
@@ -148,8 +148,8 @@ async function submit(){
 const TOUR=[
  ["img/forum.jpg","Fórum por disciplina","Dúvidas com resposta de colegas, monitores e professores."],
  ["img/grupo-chat.jpg","Chat privado do grupo","Conversa só dos integrantes do grupo, com áudio e anexos. O professor não lê."],
+ ["img/pedido-ajuda.svg","Pedido de ajuda (esquema)","O aluno marca uma mensagem do chat e descreve a dúvida. Só esse recorte chega ao monitor, ou ao professor se não houver monitoria."],
  ["img/trabalhos-lista.jpg","Trabalhos em grupo","Cada trabalho tem grupos com vagas, e cada aluno entra em um só."],
- ["img/painel-coordenacao.png","Painel da coordenação","Visão geral de atendimentos e atividade."],
  ["img/voluntariado.jpg","Voluntariado","Vagas de ONGs, inscrição e acompanhamento de horas."],
  ["img/certificados.jpg","Certificado","PDF com código que qualquer pessoa pode validar."]
 ];
