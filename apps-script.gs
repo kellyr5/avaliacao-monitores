@@ -6,7 +6,7 @@ var FORMS = {
     aba: "Monitores",
     campos: ["enviado_em", "curso", "periodo", "perfil", "identificacao", "nome",
       "us1", "us2", "us3", "us4", "us5", "fo1", "fo2", "fo3", "fo4", "co1", "co2", "co3", "co4", "vo1", "vo2", "vo3",
-      "obs_us", "obs_fo", "obs_co", "obs_vo", "canal_duvidas", "mais_util", "uso", "comentario"],
+      "obs_us", "obs_fo", "obs_co", "obs_vo", "canal_duvidas", "mais_util", "uso", "comentario", "testou"],
     itens: ["us1", "us2", "us3", "us4", "us5", "fo1", "fo2", "fo3", "fo4", "co1", "co2", "co3", "co4", "vo1", "vo2", "vo3"]
   },
   alunos: {
@@ -56,7 +56,7 @@ function configurar() {
   var linha = 1;
   ["monitores", "alunos"].forEach(function (nome) {
     var cfg = FORMS[nome];
-    abaDe(ss, cfg);
+    abaDe(ss, cfg).getRange(1, 1, 1, cfg.campos.length).setValues([cfg.campos]);
     est.getRange(linha, 1).setValue(cfg.aba).setFontWeight("bold").setFontSize(13);
     est.getRange(linha, 3).setValue("Respostas:");
     est.getRange(linha, 4).setFormula("=COUNTA(" + cfg.aba + "!A2:A)");
@@ -100,7 +100,8 @@ var ANALISE = {
     temas: [["Usabilidade", "G", "K"], ["Forum e monitoria", "L", "O"], ["Grupos, chats e duvidas", "P", "S"], ["Voluntariado", "T", "V"]],
     grupos: [["Curso", "B", CURSOS_L], ["Periodo", "C", PERIODOS_L], ["Relacao com monitoria", "D", PERFIL], ["Usaria na rotina", "AC", USO],
       ["Funcionalidade mais util", "AB", ["Chat privado de grupo", "Chat monitor e professor", "Fórum por disciplina", "Pedidos de ajuda e monitoria", "Busca de dúvidas parecidas", "Trabalhos em grupo", "Voluntariado e certificado", "Acervo de arquivos"]],
-      ["Canal atual das duvidas", "AA", ["WhatsApp", "E-mail", "Pessoalmente", "Fórum ou plataforma da disciplina", "Outro"]]]
+      ["Canal atual das duvidas", "AA", ["WhatsApp", "E-mail", "Pessoalmente", "Fórum ou plataforma da disciplina", "Outro"]],
+      ["Testou a plataforma", "AE", ["Testei na plataforma", "Só vi as telas"]]]
   },
   alunos: {
     aba: "Alunos", esc: "Escores_Alunos",

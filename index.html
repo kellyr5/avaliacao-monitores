@@ -49,6 +49,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .tour img[src$=".svg"]{object-fit:contain;height:auto;min-height:130px;background:#f3f5f8}
 .tour b{display:block;margin-top:8px;font-size:.92rem}
 .tour span{display:block;color:var(--muted);font-size:.82rem;line-height:1.4;margin-top:2px}
+.cta{font:600 .95rem var(--body);padding:11px 20px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);text-decoration:none;white-space:nowrap}
 .tourh{font:700 1.05rem var(--display);margin:0 0 4px}
 .zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:16px;z-index:20;cursor:zoom-out}
 .zoom.on{display:flex}
@@ -63,6 +64,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <h2 class="tourh">Veja a plataforma antes de responder</h2>
   <p class="lead" style="margin-bottom:12px">Toque em uma imagem para ampliar.</p>
   <div class="tour" id="tour"></div>
+  <div class="card" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between"><div style="min-width:220px;flex:1"><b style="font-size:1.05rem">Quer testar de verdade?</b><div class="hint" style="margin:4px 0 0">Entre na área de monitor da plataforma com uma conta de demonstração e explore por 5 minutos. É opcional.</div></div><a class="cta" href="teste-monitor.html">Testar a área do monitor</a></div>
   <form id="f" novalidate></form>
   <div class="zoom" id="zoom"><img alt=""></div>
 </main>
@@ -85,8 +87,8 @@ const GROUPS=[
   ["fo4","A busca por dúvidas parecidas já respondidas seria útil."]]],
  ["co","Grupos, chats e dúvidas dos alunos",[
   ["co1","O chat privado do grupo (texto, áudio e anexos) ajudaria a organizar trabalhos em equipe."],
-  ["co2","Receber o pedido de ajuda já recortado (mensagem marcada e descrição), sem ler a conversa toda do grupo, facilitaria o meu atendimento."],
-  ["co3","Receber as dúvidas dos alunos pela plataforma é melhor do que por WhatsApp ou e-mail."],
+  ["co2","Ter um canal de conversa só da monitoria com o professor, em cada disciplina, facilitaria alinhar o atendimento aos alunos."],
+  ["co3","Receber as dúvidas dos alunos pela plataforma, como pedido de ajuda com a mensagem marcada, é melhor do que por WhatsApp ou e-mail."],
   ["co4","Eu conseguiria acompanhar quais dúvidas ainda estão sem resposta."]]],
  ["vo","Voluntariado",[
   ["vo1","Achar e se inscrever em uma oportunidade parece simples."],
@@ -97,7 +99,7 @@ const ALL=GROUPS.flatMap(g=>g[2]);
 const CURSOS=["Ciência da Computação","Engenharia de Computação","Sistemas de Informação","Engenharia Elétrica","Engenharia Mecânica","Engenharia de Produção","Engenharia Civil","Engenharia Ambiental","Engenharia Hídrica","Engenharia Química","Engenharia de Materiais","Engenharia de Controle e Automação","Engenharia de Energia","Física","Matemática","Química","Outro"];
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
 const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
-const UTIL=["Chat privado de grupo","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
+const UTIL=["Chat privado de grupo","Chat monitor e professor","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
 const USO=["Usaria","Talvez usaria","Não usaria"];
 const $=s=>document.querySelector(s);
 function esc(s){const d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML}
@@ -109,6 +111,7 @@ function render(){
   <div class="item"><label for="curso">Curso</label><select id="curso">${options(CURSOS)}</select></div>
   <div class="item"><label for="periodo">Período</label><select id="periodo">${options(PERIODOS)}</select></div>
   <fieldset class="item"><legend>Qual é a sua relação com monitoria?</legend>${scale("perfil",["Sou monitor(a)","Já fui monitor(a)","Nunca fui"],"wide")}</fieldset>
+  <div class="item"><label for="testou">Você testou a plataforma com o login de demonstração?</label><select id="testou"><option value="">Selecione</option><option>Testei na plataforma</option><option>Só vi as telas</option></select></div>
   <fieldset class="item"><legend>Você quer se identificar?</legend>${scale("ident",["Prefiro ficar anônimo(a)","Quero me identificar"],"wide")}
   <div id="nomebox" style="margin-top:10px" hidden><label for="nome" style="font-weight:400">Seu nome</label><input type="text" id="nome" autocomplete="name"></div></fieldset></div>`;
   GROUPS.forEach(([g,titulo,itens])=>{
@@ -130,11 +133,11 @@ const val=n=>{const c=document.querySelector(`[name="${n}"]:checked`);return c?c
 
 async function submit(){
   const ident=val("ident")==="Quero me identificar"?"nome":val("ident")?"anon":"";
-  const p={formulario:"monitores",enviado_em:new Date().toISOString(),curso:$("#curso").value,periodo:$("#periodo").value,perfil:val("perfil"),identificacao:ident,nome:ident==="nome"?$("#nome").value.trim():""};
+  const p={formulario:"monitores",testou:$("#testou").value,enviado_em:new Date().toISOString(),curso:$("#curso").value,periodo:$("#periodo").value,perfil:val("perfil"),identificacao:ident,nome:ident==="nome"?$("#nome").value.trim():""};
   ALL.forEach(([k])=>p[k]=val(k));
   GROUPS.forEach(([g])=>p["obs_"+g]=$("#obs_"+g).value.trim());
   p.canal_duvidas=$("#canal").value;p.mais_util=$("#util").value;p.uso=val("uso");p.comentario=$("#coment").value.trim();
-  if(!p.curso||!p.periodo||!p.perfil||!ident||!p.canal_duvidas||!p.mais_util||!p.uso||ALL.some(([k])=>!p[k])){$("#err").textContent="Falta responder alguma pergunta. Só os campos de texto são opcionais.";return}
+  if(!p.testou||!p.curso||!p.periodo||!p.perfil||!ident||!p.canal_duvidas||!p.mais_util||!p.uso||ALL.some(([k])=>!p[k])){$("#err").textContent="Falta responder alguma pergunta. Só os campos de texto são opcionais.";return}
   if(!$("#consent").checked){$("#err").textContent="Marque a caixa de concordância para enviar.";return}
   if(ident==="nome"&&!p.nome){$("#err").textContent="Escreva seu nome ou escolha ficar anônimo(a).";return}
   if(!ENDPOINT){$("#err").textContent="Formulário ainda não configurado.";return}
