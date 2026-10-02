@@ -119,8 +119,9 @@ const ALL=GROUPS.flatMap(g=>g[2]);
 const CURSOS_ITAJUBA=["Administração", "Ciência da Computação", "Ciência de Dados Aplicada", "Ciências Atmosféricas", "Ciências Biológicas Licenciatura", "Design", "Engenharia Ambiental", "Engenharia Civil", "Engenharia de Bioprocessos", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Energia", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia Elétrica", "Engenharia Eletrônica", "Engenharia Hídrica", "Engenharia Mecânica", "Engenharia Mecânica Aeronáutica", "Engenharia Química", "Física Bacharelado", "Física Licenciatura", "Matemática Bacharelado", "Matemática Licenciatura", "Química Bacharelado", "Química Licenciatura", "Sistemas de Informação"];
 const CURSOS_ITABIRA=["Ciência da Computação", "Engenharia Ambiental", "Engenharia da Mobilidade", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia de Saúde e Segurança", "Engenharia Elétrica", "Engenharia Mecânica", "Inteligência Artificial", "Matemática Tecnológica"];
 function cursosOptions(){
-  const g=(nome,lista)=>`<optgroup label="Campus ${nome}">`+lista.map(c=>{const v=`${c} (${nome})`;return `<option value="${esc(v)}">${esc(c)}</option>`}).join("")+"</optgroup>";
-  return '<option value="">Selecione</option>'+g("Itajubá",CURSOS_ITAJUBA)+g("Itabira",CURSOS_ITABIRA);
+  const todos=[...CURSOS_ITAJUBA.map(c=>[c,"Itajubá"]),...CURSOS_ITABIRA.map(c=>[c,"Itabira"])]
+    .sort((a,b)=>a[0].localeCompare(b[0],"pt-BR",{sensitivity:"base"})||a[1].localeCompare(b[1],"pt-BR"));
+  return '<option value="">Selecione</option>'+todos.map(([c,campus])=>{const v=`${c} (${campus})`;return `<option value="${esc(v)}">${esc(v)}</option>`}).join("");
 }
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
 const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
