@@ -59,6 +59,7 @@ details.login summary{cursor:pointer;font-weight:600}
 .cred em{font-size:.82rem;color:var(--muted);font-style:normal}
 .acoes{display:flex;gap:10px;flex-wrap:wrap}
 .cta.ghost{background:none;color:var(--accent)}
+.dica{margin:0 0 10px;color:var(--fg);opacity:.85;font-size:.98rem}
 .tourh{font:700 1.05rem var(--display);margin:0 0 4px}
 .zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:16px;z-index:20;cursor:zoom-out}
 .zoom.on{display:flex}
@@ -69,7 +70,7 @@ details.login summary{cursor:pointer;font-weight:600}
 <main>
   <span class="tag">TCC · Plataforma UNIFEI</span>
   <h1>O que você achou da plataforma?</h1>
-  <p class="lead">Veja as telas abaixo e responda com base nelas. Você não precisa usar o site. A maioria é só tocar na nota, cerca de 4 minutos, sem conta em nenhum site.</p>
+  <p class="lead">Veja as telas abaixo, que seguem a ordem das perguntas, e responda com base nelas. Você não precisa usar o site. A maioria é só tocar na nota, cerca de 4 minutos, sem conta em nenhum site.</p>
   <h2 class="tourh">Veja a plataforma antes de responder</h2>
   <p class="lead" style="margin-bottom:12px">Toque em uma imagem para ampliar.</p>
   <div class="tour" id="tour"></div>
@@ -94,38 +95,36 @@ details.login summary{cursor:pointer;font-weight:600}
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbw84dRhGo_nULZ6r1hRCBWexRJxE-FzFyx4E6bxVwEBiha1kkWRzpiMfaM8wrl9wQXOWA/exec";
 
 const GROUPS=[
- ["us","Usabilidade",[
+ ["us","Usabilidade","",[
   ["us1","Entendi para que serve a plataforma pelas telas e explicações acima."],
   ["us2","As telas parecem fáceis de usar."],
   ["us3","Eu conseguiria usar sozinho(a), sem precisar de ajuda."],
   ["us4","É claro como ir de uma área a outra (fórum, trabalhos, voluntariado)."],
   ["us5","Os textos e botões são fáceis de entender."]]],
- ["fo","Fórum e monitoria",[
+ ["fo","Fórum por disciplina","Cada disciplina tem o seu fórum, onde os alunos publicam dúvidas e colegas, monitores e professores respondem.",[
   ["fo1","Ter um fórum por disciplina ajudaria a tirar dúvidas."],
   ["fo2","As funções (responder, votar, melhor resposta, moderar) fazem sentido."],
-  ["fo3","Os pedidos de ajuda e o canal de monitoria facilitariam o trabalho do monitor."],
-  ["fo4","A busca por dúvidas parecidas já respondidas seria útil."]]],
- ["co","Grupos, chats e dúvidas dos alunos",[
+  ["fo3","A busca por dúvidas parecidas, antes de publicar, seria útil."],
+  ["fo4","Eu conseguiria acompanhar quais dúvidas ainda estão sem resposta."]]],
+ ["co","Trabalhos em grupo, pedido de ajuda e conversa com o professor","Em um trabalho em grupo, os alunos de uma disciplina se dividem em grupos, e cada grupo tem um chat só dele, que o monitor e o professor não leem. Se o grupo travar, um aluno pode marcar uma mensagem desse chat e pedir ajuda: só esse recorte chega ao monitor.",[
   ["co1","O chat privado do grupo (texto, áudio e anexos) ajudaria a organizar trabalhos em equipe."],
-  ["co2","Ter um canal de conversa só da monitoria com o professor, em cada disciplina, facilitaria alinhar o atendimento aos alunos."],
-  ["co3","Receber as dúvidas dos alunos pela plataforma, como pedido de ajuda com a mensagem marcada, é melhor do que por WhatsApp ou e-mail."],
-  ["co4","Eu conseguiria acompanhar quais dúvidas ainda estão sem resposta."]]],
- ["vo","Voluntariado",[
+  ["co2","Receber só o recorte do pedido de ajuda (a mensagem marcada e a descrição), sem ler a conversa toda, facilitaria o meu atendimento."],
+  ["co3","Receber as dúvidas dos alunos pela plataforma é melhor do que por WhatsApp ou e-mail."],
+  ["co4","Ter um canal de conversa só da monitoria com o professor, em cada disciplina, facilitaria alinhar o atendimento aos alunos."]]],
+ ["vo","Voluntariado","Organizações publicam oportunidades, os alunos se inscrevem e, ao concluir, recebem um certificado.",[
   ["vo1","Achar e se inscrever em uma oportunidade parece simples."],
   ["vo2","As informações da oportunidade (horas, local, requisitos) estão claras."],
   ["vo3","Receber certificado com código de validação é útil."]]]
 ];
-const ALL=GROUPS.flatMap(g=>g[2]);
-const CURSOS_ITAJUBA=["Administração", "Ciência da Computação", "Ciência de Dados Aplicada", "Ciências Atmosféricas", "Ciências Biológicas Licenciatura", "Design", "Engenharia Ambiental", "Engenharia Civil", "Engenharia de Bioprocessos", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Energia", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia Elétrica", "Engenharia Eletrônica", "Engenharia Hídrica", "Engenharia Mecânica", "Engenharia Mecânica Aeronáutica", "Engenharia Química", "Física Bacharelado", "Física Licenciatura", "Matemática Bacharelado", "Matemática Licenciatura", "Química Bacharelado", "Química Licenciatura", "Sistemas de Informação"];
-const CURSOS_ITABIRA=["Ciência da Computação", "Engenharia Ambiental", "Engenharia da Mobilidade", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia de Saúde e Segurança", "Engenharia Elétrica", "Engenharia Mecânica", "Inteligência Artificial", "Matemática Tecnológica"];
+const ALL=GROUPS.flatMap(g=>g[3]);
+const CURSOS=["Administração", "Ciência da Computação", "Ciência de Dados Aplicada", "Ciências Atmosféricas", "Ciências Biológicas Licenciatura", "Design", "Engenharia Ambiental", "Engenharia Civil", "Engenharia de Bioprocessos", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Energia", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia Elétrica", "Engenharia Eletrônica", "Engenharia Hídrica", "Engenharia Mecânica", "Engenharia Mecânica Aeronáutica", "Engenharia Química", "Física Bacharelado", "Física Licenciatura", "Matemática Bacharelado", "Matemática Licenciatura", "Química Bacharelado", "Química Licenciatura", "Sistemas de Informação"];
 function cursosOptions(){
-  const todos=[...CURSOS_ITAJUBA.map(c=>[c,"Itajubá"]),...CURSOS_ITABIRA.map(c=>[c,"Itabira"])]
-    .sort((a,b)=>a[0].localeCompare(b[0],"pt-BR",{sensitivity:"base"})||a[1].localeCompare(b[1],"pt-BR"));
-  return '<option value="">Selecione</option>'+todos.map(([c,campus])=>{const v=`${c} (${campus})`;return `<option value="${esc(v)}">${esc(v)}</option>`}).join("");
+  const ord=[...CURSOS].sort((a,b)=>a.localeCompare(b,"pt-BR",{sensitivity:"base"}));
+  return '<option value="">Selecione</option>'+ord.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
 }
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
 const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
-const UTIL=["Chat privado de grupo","Chat monitor e professor","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
+const UTIL=["Fórum por disciplina","Busca de dúvidas parecidas","Trabalhos em grupo e chat do grupo","Pedidos de ajuda ao monitor","Conversa da monitoria com o professor","Acervo de arquivos","Voluntariado e certificado"];
 const USO=["Usaria","Talvez usaria","Não usaria"];
 const $=s=>document.querySelector(s);
 function esc(s){const d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML}
@@ -140,8 +139,8 @@ function render(){
   <div class="item"><label for="testou">Você testou a plataforma com o login de demonstração?</label><select id="testou"><option value="">Selecione</option><option>Testei na plataforma</option><option>Só vi as telas</option></select></div>
   <fieldset class="item"><legend>Você quer se identificar?</legend>${scale("ident",["Prefiro ficar anônimo(a)","Quero me identificar"],"wide")}
   <div id="nomebox" style="margin-top:10px" hidden><label for="nome" style="font-weight:400">Seu nome</label><input type="text" id="nome" autocomplete="name"></div></fieldset></div>`;
-  GROUPS.forEach(([g,titulo,itens])=>{
-    h+=`<div class="card"><h2>${titulo}</h2><p class="hint">1 = discordo totalmente · 5 = concordo totalmente</p>`;
+  GROUPS.forEach(([g,titulo,dica,itens])=>{
+    h+=`<div class="card"><h2>${titulo}</h2>${dica?`<p class="dica">${dica}</p>`:""}<p class="hint">1 = discordo totalmente · 5 = concordo totalmente</p>`;
     itens.forEach(([k,t])=>{h+=`<fieldset class="item"><legend>${t}</legend>${scale(k,[1,2,3,4,5])}</fieldset>`});
     h+=`<div class="item"><label for="obs_${g}">Algo aqui que confundiu, dificultou ou faltou? (opcional)</label><textarea id="obs_${g}"></textarea></div></div>`;
   });
@@ -177,14 +176,15 @@ async function submit(){
   }catch(e){b.disabled=false;$("#err").textContent="Não foi possível enviar agora. Confira sua conexão e tente de novo."}
 }
 const TOUR=[
- ["img/forum.jpg","Fórum por disciplina","Dúvidas com resposta de colegas, monitores e professores."],
- ["img/grupo-chat.jpg","Chat privado do grupo","Conversa só dos integrantes do grupo, com áudio e anexos. O professor não lê."],
- ["img/pedido-ajuda.jpg","Pedido de ajuda","O aluno marca uma mensagem do chat e descreve a dúvida. Só esse recorte chega ao monitor, ou ao professor se não houver monitoria."],
- ["img/trabalhos-lista.jpg","Trabalhos em grupo","Cada trabalho tem grupos com vagas, e cada aluno entra em um só."],
- ["img/voluntariado.jpg","Voluntariado","Vagas de ONGs, inscrição e acompanhamento de horas."],
+ ["img/forum.jpg","Fórum por disciplina","Cada disciplina tem o seu fórum. Os alunos publicam dúvidas e recebem respostas de colegas, monitores e professores."],
+ ["img/trabalhos-lista.jpg","Trabalhos em grupo","Em cada trabalho, os alunos escolhem um grupo com vagas, e cada aluno entra em um só."],
+ ["img/grupo-chat.jpg","Chat do grupo","Cada grupo tem um chat só dele, com texto, áudio e anexos. O monitor e o professor não leem a conversa."],
+ ["img/pedido-ajuda.jpg","Pedido de ajuda","Se o grupo travar, um aluno marca uma mensagem do chat e descreve a dúvida. Só esse recorte chega ao monitor, ou ao professor se não houver monitoria."],
+ ["","Conversa com o professor","Cada disciplina tem um canal reservado ao monitor e ao professor, para alinhar o atendimento. Fica na área Monitoria."],
+ ["img/voluntariado.jpg","Voluntariado","Organizações publicam oportunidades, os alunos se inscrevem e acompanham as horas."],
  ["img/certificados.jpg","Certificado","PDF com código que qualquer pessoa pode validar."]
 ];
-$("#tour").innerHTML=TOUR.map(t=>`<figure><img src="${t[0]}" alt="${esc(t[1])}" loading="lazy"><b>${t[1]}</b><span>${t[2]}</span></figure>`).join("");
+$("#tour").innerHTML=TOUR.map(t=>`<figure>${t[0]?`<img src="${t[0]}" alt="${esc(t[1])}" loading="lazy">`:""}<b>${t[1]}</b><span>${t[2]}</span></figure>`).join("");
 document.querySelectorAll(".tour img").forEach(im=>{
   im.addEventListener("error",()=>im.closest("figure").classList.add("noimg"));
   im.addEventListener("click",()=>{const z=$("#zoom");z.querySelector("img").src=im.src;z.classList.add("on")});

@@ -67,7 +67,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 <main>
   <span class="tag">TCC · Plataforma UNIFEI</span>
   <h1>Veja a plataforma e diga se ajudaria você</h1>
-  <p class="lead">Você não precisa usar o site. Veja as telas abaixo, leia a explicação de cada uma e toque na nota. Leva cerca de 2 minutos, sem conta e sem informar o nome.</p>
+  <p class="lead">Você não precisa usar o site. Veja as telas abaixo, na ordem em que um aluno as usaria (fórum, trabalhos em grupo, pedido de ajuda, arquivos, avisos e voluntariado), leia a explicação de cada uma e toque na nota. Leva cerca de 2 minutos, sem conta e sem informar o nome.</p>
   <div class="prog" id="prog"><div class="bar"><i id="pbar"></i></div><small id="ptxt"></small></div>
   <form id="f" novalidate></form>
 </main>
@@ -79,11 +79,11 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw84dRhGo_nULZ6r1hRCBW
 
 /* Uma tela por componente. As imagens ficam em img/; sem a imagem, a tela aparece só com o texto. */
 const AREAS=[
- ["cp1","Fórum por disciplina","Você pergunta e colegas, monitores e professores respondem. A melhor resposta fica marcada e o que já foi resolvido fica guardado para a turma toda.","img/forum.jpg","Tela do fórum de uma disciplina"],
- ["cp2","Pedido de ajuda ao monitor","Dentro do chat do grupo, você marca uma mensagem e descreve a dúvida. Só esse recorte chega ao monitor da disciplina (ou ao professor, se não houver monitoria), e o resto da conversa continua privado.","img/pedido-ajuda.jpg|img/pedido-ajuda.svg","Pedido de ajuda e esquema do fluxo"],
- ["cp3","Busca de dúvidas parecidas","Antes de perguntar, a busca mostra se alguém já publicou uma dúvida com palavras parecidas com as suas, para você não repetir a pergunta.","img/busca.jpg","Tela de busca do fórum"],
- ["cp4","Chat privado do grupo","Cada grupo de trabalho tem a sua conversa, com texto, áudio e anexos, e só os integrantes do grupo a veem. O professor e os outros grupos não leem nada, e quem já está em um grupo não entra em outro.","img/grupo-chat.jpg|img/trabalhos-lista.jpg","Conversa do grupo e lista de grupos do trabalho"],
- ["cp5","Acervo de arquivos","Os arquivos dos trabalhos ficam reunidos em um só lugar, e cada um só aparece para quem tem permissão.","",""],
+ ["cp1","Fórum por disciplina","Cada disciplina tem o seu fórum. Você publica uma dúvida e colegas, monitores e professores respondem. A melhor resposta fica marcada, e o que já foi resolvido fica guardado para a turma toda.","img/forum.jpg","Tela do fórum de uma disciplina"],
+ ["cp3","Busca de dúvidas parecidas","Antes de publicar, você pode buscar se alguém já fez a mesma pergunta. A busca procura pelas palavras que você digitar.","img/busca.jpg","Tela de busca do fórum"],
+ ["cp4","Trabalhos em grupo e chat do grupo","Quando uma disciplina tem trabalho em grupo, a plataforma mostra os grupos com vagas e cada aluno entra em um só. Cada grupo ganha um chat próprio, com texto, áudio e anexos, que só os integrantes do grupo veem. O professor, o monitor e os outros grupos não leem a conversa.","img/trabalhos-lista.jpg|img/grupo-chat.jpg","Lista de grupos de um trabalho e chat do grupo"],
+ ["cp2","Pedido de ajuda ao monitor","Se o grupo travar, um integrante marca uma mensagem do chat do grupo e escreve a dúvida. Só esse recorte, a mensagem marcada e a descrição, chega ao monitor da disciplina, ou ao professor se não houver monitoria. O resto da conversa continua privado.","img/pedido-ajuda.jpg|img/pedido-ajuda.svg","Pedido de ajuda e esquema do fluxo"],
+ ["cp5","Acervo de arquivos","Os arquivos que você envia ou recebe no fórum, nos chats e nos trabalhos ficam reunidos em um só lugar, e cada arquivo só aparece para quem já tinha permissão de vê-lo.","",""],
  ["cp6","Notificações","Aviso na hora quando alguém responde sua dúvida ou quando algo precisa da sua atenção.","img/notificacoes.jpg","Tela de notificações"],
  ["cp7","Oportunidades de voluntariado","Vagas de ONGs e projetos, com inscrição e acompanhamento das suas horas pela plataforma.","img/voluntariado.jpg","Tela de oportunidades de voluntariado"],
  ["cp8","Certificado com código de validação","Ao concluir, você recebe um certificado em PDF que qualquer pessoa pode conferir pelo código.","img/certificados.jpg","Tela de certificado"]
@@ -93,20 +93,18 @@ const AGREGA=[
  ["ag2","Ver respostas de colegas, monitores e professores me ajudaria a aprender."],
  ["ag3","Achar uma dúvida parecida já respondida me faria economizar tempo."],
  ["ag4","Pedir ajuda ao monitor pela plataforma é melhor do que por WhatsApp."],
- ["ag5","Um espaço privado para o meu grupo de trabalho seria útil."],
+ ["ag5","Um chat privado para o meu grupo de trabalho seria útil."],
  ["ag6","Fazer voluntariado e receber certificado pela plataforma me motivaria."]
 ];
 const COMPREENSAO=[["us1","Entendi para que serve a plataforma."],["us2","As telas parecem fáceis de usar."]];
-const CURSOS_ITAJUBA=["Administração", "Ciência da Computação", "Ciência de Dados Aplicada", "Ciências Atmosféricas", "Ciências Biológicas Licenciatura", "Design", "Engenharia Ambiental", "Engenharia Civil", "Engenharia de Bioprocessos", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Energia", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia Elétrica", "Engenharia Eletrônica", "Engenharia Hídrica", "Engenharia Mecânica", "Engenharia Mecânica Aeronáutica", "Engenharia Química", "Física Bacharelado", "Física Licenciatura", "Matemática Bacharelado", "Matemática Licenciatura", "Química Bacharelado", "Química Licenciatura", "Sistemas de Informação"];
-const CURSOS_ITABIRA=["Ciência da Computação", "Engenharia Ambiental", "Engenharia da Mobilidade", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia de Saúde e Segurança", "Engenharia Elétrica", "Engenharia Mecânica", "Inteligência Artificial", "Matemática Tecnológica"];
+const CURSOS=["Administração", "Ciência da Computação", "Ciência de Dados Aplicada", "Ciências Atmosféricas", "Ciências Biológicas Licenciatura", "Design", "Engenharia Ambiental", "Engenharia Civil", "Engenharia de Bioprocessos", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Energia", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia Elétrica", "Engenharia Eletrônica", "Engenharia Hídrica", "Engenharia Mecânica", "Engenharia Mecânica Aeronáutica", "Engenharia Química", "Física Bacharelado", "Física Licenciatura", "Matemática Bacharelado", "Matemática Licenciatura", "Química Bacharelado", "Química Licenciatura", "Sistemas de Informação"];
 function cursosOptions(){
-  const todos=[...CURSOS_ITAJUBA.map(c=>[c,"Itajubá"]),...CURSOS_ITABIRA.map(c=>[c,"Itabira"])]
-    .sort((a,b)=>a[0].localeCompare(b[0],"pt-BR",{sensitivity:"base"})||a[1].localeCompare(b[1],"pt-BR"));
-  return '<option value="">Selecione</option>'+todos.map(([c,campus])=>{const v=`${c} (${campus})`;return `<option value="${esc(v)}">${esc(v)}</option>`}).join("");
+  const ord=[...CURSOS].sort((a,b)=>a.localeCompare(b,"pt-BR",{sensitivity:"base"}));
+  return '<option value="">Selecione</option>'+ord.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
 }
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
 const CANAIS=["Grupo de WhatsApp da turma","Perguntando ao professor","Perguntando ao monitor","Perguntando a colegas","Pesquisando na internet","Outro"];
-const UTIL=["Fórum por disciplina","Busca de dúvidas parecidas","Pedidos de ajuda ao monitor","Chat privado do grupo","Acervo de arquivos","Notificações","Voluntariado e certificado"];
+const UTIL=["Fórum por disciplina","Busca de dúvidas parecidas","Trabalhos em grupo e chat do grupo","Pedidos de ajuda ao monitor","Acervo de arquivos","Notificações","Voluntariado e certificado"];
 const USO=["Usaria","Talvez usaria","Não usaria"];
 const OBRIG=[...AREAS.map(a=>a[0]),...COMPREENSAO.map(a=>a[0])];
 const $=s=>document.querySelector(s);

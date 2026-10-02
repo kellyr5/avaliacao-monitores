@@ -92,14 +92,14 @@ function configurar() {
 var MAXL = 300; // le as linhas 2 a 301 de cada aba de respostas
 var PERFIL = ["Sou monitor(a)", "Já fui monitor(a)", "Nunca fui"];
 var USO = ["Usaria", "Talvez usaria", "Não usaria"];
-var CURSOS_L = ["Administração (Itajubá)", "Ciência da Computação (Itajubá)", "Ciência de Dados Aplicada (Itajubá)", "Ciências Atmosféricas (Itajubá)", "Ciências Biológicas Licenciatura (Itajubá)", "Design (Itajubá)", "Engenharia Ambiental (Itajubá)", "Engenharia Civil (Itajubá)", "Engenharia de Bioprocessos (Itajubá)", "Engenharia de Computação (Itajubá)", "Engenharia de Controle e Automação (Itajubá)", "Engenharia de Energia (Itajubá)", "Engenharia de Materiais (Itajubá)", "Engenharia de Produção (Itajubá)", "Engenharia Elétrica (Itajubá)", "Engenharia Eletrônica (Itajubá)", "Engenharia Hídrica (Itajubá)", "Engenharia Mecânica (Itajubá)", "Engenharia Mecânica Aeronáutica (Itajubá)", "Engenharia Química (Itajubá)", "Física Bacharelado (Itajubá)", "Física Licenciatura (Itajubá)", "Matemática Bacharelado (Itajubá)", "Matemática Licenciatura (Itajubá)", "Química Bacharelado (Itajubá)", "Química Licenciatura (Itajubá)", "Sistemas de Informação (Itajubá)", "Ciência da Computação (Itabira)", "Engenharia Ambiental (Itabira)", "Engenharia da Mobilidade (Itabira)", "Engenharia de Computação (Itabira)", "Engenharia de Controle e Automação (Itabira)", "Engenharia de Materiais (Itabira)", "Engenharia de Produção (Itabira)", "Engenharia de Saúde e Segurança (Itabira)", "Engenharia Elétrica (Itabira)", "Engenharia Mecânica (Itabira)", "Inteligência Artificial (Itabira)", "Matemática Tecnológica (Itabira)"];
+var CURSOS_L = ["Administração", "Ciência da Computação", "Ciência de Dados Aplicada", "Ciências Atmosféricas", "Ciências Biológicas Licenciatura", "Design", "Engenharia Ambiental", "Engenharia Civil", "Engenharia de Bioprocessos", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Energia", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia Elétrica", "Engenharia Eletrônica", "Engenharia Hídrica", "Engenharia Mecânica", "Engenharia Mecânica Aeronáutica", "Engenharia Química", "Física Bacharelado", "Física Licenciatura", "Matemática Bacharelado", "Matemática Licenciatura", "Química Bacharelado", "Química Licenciatura", "Sistemas de Informação"];
 var PERIODOS_L = ["1º", "2º", "3º", "4º", "5º", "6º", "7º", "8º", "9º", "10º ou mais"];
 var ANALISE = {
   monitores: {
     aba: "Monitores", esc: "Escores_Monitores",
-    temas: [["Usabilidade", "G", "K"], ["Forum e monitoria", "L", "O"], ["Grupos, chats e duvidas", "P", "S"], ["Voluntariado", "T", "V"]],
+    temas: [["Usabilidade", "G", "K"], ["Forum por disciplina", "L", "O"], ["Grupos e pedido de ajuda", "P", "S"], ["Voluntariado", "T", "V"]],
     grupos: [["Curso", "B", CURSOS_L], ["Periodo", "C", PERIODOS_L], ["Relacao com monitoria", "D", PERFIL], ["Usaria na rotina", "AC", USO],
-      ["Funcionalidade mais util", "AB", ["Chat privado de grupo", "Chat monitor e professor", "Fórum por disciplina", "Pedidos de ajuda e monitoria", "Busca de dúvidas parecidas", "Trabalhos em grupo", "Voluntariado e certificado", "Acervo de arquivos"]],
+      ["Funcionalidade mais util", "AB", ["Fórum por disciplina", "Busca de dúvidas parecidas", "Trabalhos em grupo e chat do grupo", "Pedidos de ajuda ao monitor", "Conversa da monitoria com o professor", "Acervo de arquivos", "Voluntariado e certificado"]],
       ["Canal atual das duvidas", "AA", ["WhatsApp", "E-mail", "Pessoalmente", "Fórum ou plataforma da disciplina", "Outro"]],
       ["Testou a plataforma", "AE", ["Testei na plataforma", "Só vi as telas"]]]
   },
@@ -108,7 +108,7 @@ var ANALISE = {
     temas: [["Agregacao da plataforma", "E", "J"], ["Utilidade dos componentes", "K", "R"], ["Primeira impressao", "S", "T"]],
     grupos: [["Curso", "B", CURSOS_L], ["Periodo", "C", PERIODOS_L], ["Canal atual das duvidas", "D", ["Grupo de WhatsApp da turma", "Perguntando ao professor", "Perguntando ao monitor", "Perguntando a colegas", "Pesquisando na internet", "Outro"]],
       ["Usaria nas disciplinas", "V", USO],
-      ["Funcionalidade mais util", "U", ["Fórum por disciplina", "Busca de dúvidas parecidas", "Pedidos de ajuda ao monitor", "Chat privado do grupo", "Acervo de arquivos", "Notificações", "Voluntariado e certificado"]]]
+      ["Funcionalidade mais util", "U", ["Fórum por disciplina", "Busca de dúvidas parecidas", "Trabalhos em grupo e chat do grupo", "Pedidos de ajuda ao monitor", "Acervo de arquivos", "Notificações", "Voluntariado e certificado"]]]
   }
 };
 var COMPONENTES = ["Forum por disciplina", "Pedidos de ajuda ao monitor", "Busca de duvidas parecidas", "Chat privado do grupo", "Acervo de arquivos", "Notificacoes", "Oportunidades de voluntariado", "Certificados com codigo de validacao"];
