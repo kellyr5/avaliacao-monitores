@@ -82,6 +82,7 @@ details.login summary{cursor:pointer;font-weight:600}
       <div class="cred"><span>Senha</span><code>Demo2026.</code><em>(a senha termina com um ponto)</em></div>
       <p class="hint" style="margin:8px 0 0">Conta de exemplo, com dados fictícios e compartilhada com outras pessoas. Não digite dados pessoais.</p>
     </details>
+    <p class="hint" style="margin:0 0 10px">Endereço da plataforma: <b><a href="https://plataforma-unifei.onrender.com/" target="_blank" rel="noopener" style="color:var(--accent)">plataforma-unifei.onrender.com</a></b></p>
     <div class="acoes"><a class="cta" href="https://plataforma-unifei.onrender.com/" target="_blank" rel="noopener">Abrir a plataforma</a><a class="cta ghost" href="teste-monitor.html">Ver o passo a passo</a></div>
   </div>
   <form id="f" novalidate></form>
@@ -115,7 +116,12 @@ const GROUPS=[
   ["vo3","Receber certificado com código de validação é útil."]]]
 ];
 const ALL=GROUPS.flatMap(g=>g[2]);
-const CURSOS=["Ciência da Computação","Engenharia de Computação","Sistemas de Informação","Engenharia Elétrica","Engenharia Mecânica","Engenharia de Produção","Engenharia Civil","Engenharia Ambiental","Engenharia Hídrica","Engenharia Química","Engenharia de Materiais","Engenharia de Controle e Automação","Engenharia de Energia","Física","Matemática","Química","Outro"];
+const CURSOS_ITAJUBA=["Administração", "Ciência da Computação", "Ciência de Dados Aplicada", "Ciências Atmosféricas", "Ciências Biológicas Licenciatura", "Design", "Engenharia Ambiental", "Engenharia Civil", "Engenharia de Bioprocessos", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Energia", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia Elétrica", "Engenharia Eletrônica", "Engenharia Hídrica", "Engenharia Mecânica", "Engenharia Mecânica Aeronáutica", "Engenharia Química", "Física Bacharelado", "Física Licenciatura", "Matemática Bacharelado", "Matemática Licenciatura", "Química Bacharelado", "Química Licenciatura", "Sistemas de Informação"];
+const CURSOS_ITABIRA=["Ciência da Computação", "Engenharia Ambiental", "Engenharia da Mobilidade", "Engenharia de Computação", "Engenharia de Controle e Automação", "Engenharia de Materiais", "Engenharia de Produção", "Engenharia de Saúde e Segurança", "Engenharia Elétrica", "Engenharia Mecânica", "Inteligência Artificial", "Matemática Tecnológica"];
+function cursosOptions(){
+  const g=(nome,lista)=>`<optgroup label="Campus ${nome}">`+lista.map(c=>{const v=`${c} (${nome})`;return `<option value="${esc(v)}">${esc(c)}</option>`}).join("")+"</optgroup>";
+  return '<option value="">Selecione</option>'+g("Itajubá",CURSOS_ITAJUBA)+g("Itabira",CURSOS_ITABIRA);
+}
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
 const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
 const UTIL=["Chat privado de grupo","Chat monitor e professor","Fórum por disciplina","Pedidos de ajuda e monitoria","Busca de dúvidas parecidas","Trabalhos em grupo","Voluntariado e certificado","Acervo de arquivos"];
@@ -127,7 +133,7 @@ function options(list){return '<option value="">Selecione</option>'+list.map(o=>
 
 function render(){
   let h=`<div class="card"><h2>Sobre você</h2>
-  <div class="item"><label for="curso">Curso</label><select id="curso">${options(CURSOS)}</select></div>
+  <div class="item"><label for="curso">Curso</label><select id="curso">${cursosOptions()}</select></div>
   <div class="item"><label for="periodo">Período</label><select id="periodo">${options(PERIODOS)}</select></div>
   <fieldset class="item"><legend>Qual é a sua relação com monitoria?</legend>${scale("perfil",["Sou monitor(a)","Já fui monitor(a)","Nunca fui"],"wide")}</fieldset>
   <div class="item"><label for="testou">Você testou a plataforma com o login de demonstração?</label><select id="testou"><option value="">Selecione</option><option>Testei na plataforma</option><option>Só vi as telas</option></select></div>
