@@ -103,9 +103,9 @@ const GROUPS=[
   ["us5","Os textos e botões são fáceis de entender."]]],
  ["fo","Fórum por disciplina","Cada disciplina tem o seu fórum, onde os alunos publicam dúvidas e colegas, monitores e professores respondem.",[
   ["fo1","Ter um fórum por disciplina ajudaria a tirar dúvidas."],
-  ["fo2","As funções (responder, votar, melhor resposta, moderar) fazem sentido."],
+  ["fo2","As funções do fórum (responder, votar, marcar a melhor resposta, denunciar e moderar) fazem sentido."],
   ["fo3","A busca por dúvidas parecidas, antes de publicar, seria útil."],
-  ["fo4","Eu conseguiria acompanhar quais dúvidas ainda estão sem resposta."]]],
+  ["fo4","Ver, por disciplina, as dúvidas que ainda estão sem resposta (no painel da monitoria) ajudaria no meu trabalho."]]],
  ["co","Trabalhos em grupo, pedido de ajuda e conversa com o professor","Em um trabalho em grupo, os alunos de uma disciplina se dividem em grupos, e cada grupo tem um chat só dele, que o monitor e o professor não leem. Se o grupo travar, um aluno pode marcar uma mensagem desse chat e pedir ajuda: só esse recorte chega ao monitor.",[
   ["co1","O chat privado do grupo (texto, áudio e anexos) ajudaria a organizar trabalhos em equipe."],
   ["co2","Receber só o recorte do pedido de ajuda (a mensagem marcada e a descrição), sem ler a conversa toda, facilitaria o meu atendimento."],
@@ -176,11 +176,12 @@ async function submit(){
   }catch(e){b.disabled=false;$("#err").textContent="Não foi possível enviar agora. Confira sua conexão e tente de novo."}
 }
 const TOUR=[
- ["img/forum.jpg","Fórum por disciplina","Cada disciplina tem o seu fórum. Os alunos publicam dúvidas e recebem respostas de colegas, monitores e professores."],
+ ["img/forum.jpg","Fórum por disciplina","Cada disciplina tem o seu fórum. Os alunos publicam dúvidas e recebem respostas de colegas, monitores e professores. Dá para votar nas respostas, marcar a melhor e denunciar conteúdo, e monitores e professores moderam."],
+ ["","Painel da monitoria","Quem é monitor ganha a área Monitoria no menu. Ela lista as suas disciplinas e mostra, em cada uma, as dúvidas sem resposta e as denúncias a analisar, com atalho para responder."],
  ["img/trabalhos-lista.jpg","Trabalhos em grupo","Em cada trabalho, os alunos escolhem um grupo com vagas, e cada aluno entra em um só."],
  ["img/grupo-chat.jpg","Chat do grupo","Cada grupo tem um chat só dele, com texto, áudio e anexos. O monitor e o professor não leem a conversa."],
  ["img/pedido-ajuda.jpg","Pedido de ajuda","Se o grupo travar, um aluno marca uma mensagem do chat e descreve a dúvida. Só esse recorte chega ao monitor, ou ao professor se não houver monitoria."],
- ["","Conversa com o professor","Cada disciplina tem um canal reservado ao monitor e ao professor, para alinhar o atendimento. Fica na área Monitoria."],
+ ["","Conversa com o professor","Dentro da área Monitoria, cada disciplina tem um canal reservado ao monitor e ao professor, para alinhar o atendimento."],
  ["img/voluntariado.jpg","Voluntariado","Organizações publicam oportunidades, os alunos se inscrevem e acompanham as horas."],
  ["img/certificados.jpg","Certificado","PDF com código que qualquer pessoa pode validar."]
 ];
