@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" role="img" aria-label="Esquema do painel da monitoria: resumo das disciplinas, dúvidas sem resposta e denúncias, com atalho para responder">
+  <rect width="900" height="330" fill="#f3f5f8"/>
+  <g font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" fill="#152033">
+    <text x="30" y="46" font-size="24" font-weight="700">Minha monitoria</text>
+    <text x="30" y="72" font-size="15" fill="#5b6678">Disciplinas em que você atua como monitor neste semestre</text>
+
+    <rect x="30" y="92" width="840" height="76" rx="12" fill="#ffffff" stroke="#d9dfe8"/>
+    <g font-size="15" fill="#5b6678">
+      <text x="60" y="150">disciplinas</text>
+      <text x="260" y="150">estudantes</text>
+      <text x="460" y="150">dúvidas sem resposta</text>
+      <text x="700" y="150">denúncias a analisar</text>
+    </g>
+    <g font-size="26" font-weight="700" fill="#1b4f9c">
+      <text x="60" y="130">N</text><text x="260" y="130">N</text><text x="460" y="130">N</text><text x="700" y="130">N</text>
+    </g>
+
+    <rect x="30" y="184" width="840" height="100" rx="12" fill="#ffffff" stroke="#d9dfe8"/>
+    <text x="54" y="216" font-size="18" font-weight="700">Código da disciplina</text>
+    <text x="54" y="242" font-size="15" fill="#5b6678">Nome da disciplina · monitoria</text>
+    <rect x="54" y="252" width="210" height="22" rx="6" fill="#1b4f9c"/>
+    <text x="159" y="268" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">Responder pendentes</text>
+    <rect x="278" y="252" width="130" height="22" rx="6" fill="#ffffff" stroke="#1b4f9c"/>
+    <text x="343" y="268" font-size="14" font-weight="600" fill="#1b4f9c" text-anchor="middle">Abrir fórum</text>
+    <g font-size="14" fill="#5b6678" text-anchor="middle">
+      <text x="620" y="226">sem resposta</text><text x="720" y="226">dúvidas</text><text x="800" y="226">respondi</text>
+    </g>
+    <g font-size="22" font-weight="700" fill="#152033" text-anchor="middle">
+      <text x="620" y="256">N</text><text x="720" y="256">N</text><text x="800" y="256">N</text>
+    </g>
+    <text x="450" y="314" font-size="14" fill="#5b6678" text-anchor="middle">Esquema ilustrativo do painel. Não é uma tela da plataforma.</text>
+  </g>
+</svg>

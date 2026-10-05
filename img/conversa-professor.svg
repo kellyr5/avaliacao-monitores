@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" role="img" aria-label="Esquema da conversa reservada entre o monitor e o professor de cada disciplina">
+  <rect width="900" height="330" fill="#f3f5f8"/>
+  <g font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" fill="#152033">
+    <rect x="30" y="24" width="840" height="250" rx="12" fill="#ffffff" stroke="#d9dfe8"/>
+    <text x="54" y="62" font-size="20" font-weight="700">Conversa com o professor</text>
+    <text x="54" y="88" font-size="15" fill="#5b6678">Canal reservado ao monitor e ao professor, um por disciplina</text>
+
+    <text x="54" y="128" font-size="14" fill="#5b6678">Professor</text>
+    <rect x="54" y="136" width="400" height="50" rx="14" fill="#f3f5f8" stroke="#d9dfe8"/>
+    <text x="74" y="167" font-size="16">Como estão as dúvidas desta semana?</text>
+
+    <text x="846" y="128" font-size="14" fill="#5b6678" text-anchor="end">Monitor</text>
+    <rect x="430" y="196" width="400" height="50" rx="14" fill="#1b4f9c"/>
+    <text x="450" y="227" font-size="16" fill="#ffffff">Respondi as pendentes e sobrou uma.</text>
+
+    <text x="450" y="314" font-size="14" fill="#5b6678" text-anchor="middle">Esquema ilustrativo. Não é uma tela da plataforma.</text>
+  </g>
+</svg>
