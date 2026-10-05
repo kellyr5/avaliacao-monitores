@@ -108,7 +108,7 @@ var ANALISE = {
     aba: "Monitores", esc: "Escores_Monitores",
     temas: [["Usabilidade", "G", "K"], ["Forum por disciplina", "L", "O"], ["Grupos e pedido de ajuda", "P", "S"], ["Voluntariado", "T", "V"]],
     grupos: [["Curso", "B", CURSOS_L], ["Periodo", "C", PERIODOS_L], ["Relacao com monitoria", "D", PERFIL], ["Usaria na rotina", "AC", USO],
-      ["Funcionalidade mais util", "AB", ["Fórum por disciplina", "Busca de dúvidas parecidas", "Trabalhos em grupo e chat do grupo", "Pedidos de ajuda ao monitor", "Conversa da monitoria com o professor", "Acervo de arquivos", "Voluntariado e certificado"]],
+      ["Funcionalidade mais util", "AB", ["Fórum por disciplina", "Busca de dúvidas parecidas", "Painel da monitoria (dúvidas sem resposta)", "Trabalhos em grupo e chat do grupo", "Pedidos de ajuda ao monitor", "Conversa da monitoria com o professor", "Acervo de arquivos", "Notificações", "Voluntariado e certificado"]],
       ["Canal atual das duvidas", "AA", ["WhatsApp", "E-mail", "Pessoalmente", "Fórum ou plataforma da disciplina", "Outro"]],
       ["Testou a plataforma", "AE", ["Testei na plataforma", "Só vi as telas"]]]
   },
@@ -249,8 +249,8 @@ var ROT_ALU = {
   cp7: "Oportunidades de voluntariado", cp8: "Certificado com código de validação",
   us1: "Entendi para que serve a plataforma", us2: "As telas parecem fáceis de usar"
 };
-var UTIL_L = ["Fórum por disciplina", "Busca de dúvidas parecidas", "Trabalhos em grupo e chat do grupo", "Pedidos de ajuda ao monitor",
-  "Conversa da monitoria com o professor", "Acervo de arquivos", "Notificações", "Voluntariado e certificado"];
+var UTIL_L = ["Fórum por disciplina", "Busca de dúvidas parecidas", "Painel da monitoria (dúvidas sem resposta)", "Trabalhos em grupo e chat do grupo",
+  "Pedidos de ajuda ao monitor", "Conversa da monitoria com o professor", "Acervo de arquivos", "Notificações", "Voluntariado e certificado"];
 var CANAIS_M = ["WhatsApp", "E-mail", "Pessoalmente", "Fórum ou plataforma da disciplina", "Outro"];
 var CANAIS_A = ["Grupo de WhatsApp da turma", "Perguntando ao professor", "Perguntando ao monitor", "Perguntando a colegas", "Pesquisando na internet", "Outro"];
 
@@ -467,7 +467,7 @@ function painel(ss) {
   l = Math.max(t1.proxima, l + 11);
   var t2 = tabelaContagem(sh, l, "Funcionalidade mais útil", UTIL_L, [["Monitores", M, "AB"], ["Alunos", A, "U"]]);
   grafico(sh, Charts.ChartType.BAR, "Funcionalidade mais útil", t2, 2, [5, 6], l, [COR.azul2, COR.oliva]);
-  l = Math.max(t2.proxima, l + 15);
+  l = Math.max(t2.proxima, l + 16);
   var t3 = tabelaContagem(sh, l, "Por onde as dúvidas chegam hoje (monitores)", CANAIS_M, [["Monitores", M, "AA"]]);
   grafico(sh, Charts.ChartType.BAR, "Canal atual das dúvidas · monitores", t3, 2, [5], l, [COR.azul2]);
   l = Math.max(t3.proxima, l + 12);

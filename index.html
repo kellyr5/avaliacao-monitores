@@ -125,7 +125,7 @@ function cursosOptions(){
 }
 const PERIODOS=["1º","2º","3º","4º","5º","6º","7º","8º","9º","10º ou mais"];
 const CANAIS=["WhatsApp","E-mail","Pessoalmente","Fórum ou plataforma da disciplina","Outro"];
-const UTIL=["Fórum por disciplina","Busca de dúvidas parecidas","Trabalhos em grupo e chat do grupo","Pedidos de ajuda ao monitor","Conversa da monitoria com o professor","Acervo de arquivos","Voluntariado e certificado"];
+const UTIL=["Fórum por disciplina","Busca de dúvidas parecidas","Painel da monitoria (dúvidas sem resposta)","Trabalhos em grupo e chat do grupo","Pedidos de ajuda ao monitor","Conversa da monitoria com o professor","Acervo de arquivos","Notificações","Voluntariado e certificado"];
 const USO=["Usaria","Talvez usaria","Não usaria"];
 const $=s=>document.querySelector(s);
 function esc(s){const d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML}
@@ -180,11 +180,13 @@ const TOUR=[
  ["img/forum.jpg","Fórum por disciplina","Cada disciplina tem o seu fórum. Os alunos publicam dúvidas e recebem respostas de colegas, monitores e professores. Dá para votar nas respostas, marcar a melhor e denunciar conteúdo, e monitores e professores moderam."],
  ["img/forum-duvidas-parecidas.jpg","Dúvidas parecidas antes de publicar","Ao escrever o título de uma nova dúvida, a plataforma já mostra discussões parecidas da mesma disciplina, para o aluno conferir antes de publicar."],
  ["img/forum-denunciar.jpg","Denunciar conteúdo","Todo tópico e toda resposta têm o botão Denunciar, que pede o motivo e envia o caso para a fila de moderação do monitor e do professor."],
- ["img/painel-monitoria.svg","Painel da monitoria (esquema)","Quem é monitor ganha a área Monitoria no menu. Ela lista as suas disciplinas e mostra, em cada uma, as dúvidas sem resposta e as denúncias a analisar, com atalho para responder."],
+ ["img/painel-monitoria.jpg","Painel da monitoria","Quem é monitor ganha a área Monitoria no menu. Ela lista as suas disciplinas e mostra, em cada uma, as dúvidas sem resposta e as denúncias a analisar, com atalho para responder."],
  ["img/trabalhos-lista.jpg","Trabalhos em grupo","Em cada trabalho, os alunos escolhem um grupo com vagas, e cada aluno entra em um só."],
  ["img/grupo-chat.jpg","Chat do grupo","Cada grupo tem um chat só dele, com texto, áudio e anexos. O monitor e o professor não leem a conversa."],
  ["img/pedido-ajuda.jpg","Pedido de ajuda","Se o grupo travar, um aluno marca uma mensagem do chat e descreve a dúvida. Só esse recorte chega ao monitor, ou ao professor se não houver monitoria."],
- ["img/conversa-professor.svg","Conversa com o professor (esquema)","Dentro da área Monitoria, cada disciplina tem um canal reservado ao monitor e ao professor, para alinhar o atendimento."],
+ ["img/conversa-professor.jpg","Conversa com o professor","Dentro da área Monitoria, cada disciplina tem um canal reservado ao monitor e ao professor, para alinhar o atendimento."],
+ ["","Acervo de arquivos","Os arquivos enviados no fórum, nos chats e nos trabalhos ficam reunidos em um só lugar, e cada arquivo só aparece para quem já tinha permissão de vê-lo."],
+ ["img/notificacoes.jpg","Notificações","Aviso na hora quando alguém responde uma dúvida ou quando algo precisa de atenção, como uma denúncia ou um pedido de ajuda."],
  ["img/voluntariado.jpg","Voluntariado","Organizações publicam oportunidades, os alunos se inscrevem e acompanham as horas."],
  ["img/certificados.jpg","Certificado","PDF com código que qualquer pessoa pode validar."]
 ];
