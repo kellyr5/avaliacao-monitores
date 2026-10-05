@@ -10,10 +10,21 @@ Dois formulários estáticos publicados no GitHub Pages que gravam as respostas 
 
 1. Crie uma planilha no Google Planilhas.
 2. Vá em Extensões > Apps Script, cole o conteúdo de `apps-script.gs` e salve.
-3. Rode a função `configurar` uma vez, para criar as abas e as estatísticas.
+3. Rode a função `gerarPainel` uma vez, para criar as abas, as estatísticas e o painel.
 4. Implante como "App da Web": executar como "Eu", acesso para "Qualquer pessoa". Copie a URL terminada em `/exec`.
 5. Cole a URL em `const ENDPOINT = "";` nos dois arquivos HTML.
 6. Publique no GitHub Pages (branch `main`, pasta raiz).
+
+## Painel de resultados
+
+A aba `Painel` é a primeira da planilha e se recalcula sozinha a cada resposta. Ela traz:
+
+- cartões com respostas, nota geral, concordância (notas 4 e 5), quem usaria e quem testou;
+- nota média por tema e por pergunta, com barras e cores (vermelho a verde);
+- gráficos de "usaria a plataforma?", funcionalidade mais útil, canal atual das dúvidas e período.
+
+Para (re)gerar o painel depois de colar uma nova versão do `apps-script.gs`, rode `gerarPainel` (ou `configurar`) no editor.
+Isso nunca apaga as respostas das abas `Monitores` e `Alunos`; só refaz `Estatisticas`, `Analise` e `Painel` e o estilo das abas.
 
 ## Análise
 
